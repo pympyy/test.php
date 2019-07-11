@@ -48,22 +48,8 @@
 					    	$sql->close();
 				    	}else{
 				    		// логировать ошибку
-				    		echo "Не удалось привязать параметры: (" . $stmt->errno . ") " . $stmt->error;
+				    		echo "Не удалось привязать параметры: (" . $sql->errno . ") " . $sql->error;
 				    	}
-
-					    // $result = mysqli_query($mysqli, $sql);
-
-					 //    if (! empty($result)) {
-					 //        $affectedRow ++;
-					 //    } else {
-					 //        $error_message = mysqli_error($conn) . "\n";
-					 //    }
-
-					 //    if ($affectedRow > 0) {
-						//     $message = $affectedRow . " records inserted";
-						// } else {
-						//     $message = "No records inserted";
-						// }
 
 					}
 				}
@@ -82,7 +68,6 @@
 
 ?>
 
-<div><?php  echo $message; ?></div>
 <?php if (! empty($error_message)) { ?>
 <div><?php echo nl2br($error_message); ?></div>
 <?php } ?>
