@@ -13,5 +13,6 @@ class Controller_Portfolio extends Controller
 	{
 		$data = $this->model->get_data();		
 		$this->view->generate('portfolio_view.php', 'template_view.php', $data);
+		var_dump($data);
 	}
 }

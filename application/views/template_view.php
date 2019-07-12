@@ -3,16 +3,9 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title>Test PHP MVC</title>
-		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	</head>
 	<body>
-			
-	<ul class="list">
-		<li class="first "><a href="/">Главная</a></li>
-		<li><a href="/services">Услуги</a></li>
-		<li><a href="/portfolio">Портфолио</a></li>
-		<li class="last"><a href="/contacts">Контакты</a></li>
-	</ul>
 	<div id="content">
 		<div class="box">
 			<?php include 'application/views/'.$content_view; ?>

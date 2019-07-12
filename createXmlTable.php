@@ -22,7 +22,6 @@
 
 					$xml = simplexml_load_file($uploadfile) or die("Error: Cannot create object");
 
-					$affectedRow = 0;
 
 					foreach ($xml->children() as $i => $row) {
 						    $name = $row->Name;

@@ -2,9 +2,6 @@
 
 class Model_Portfolio extends Model
 {
-    public function blaBla (){
-        $this->db->query('SELECT');
-    }
 	public function get_data()
 	{	
 		

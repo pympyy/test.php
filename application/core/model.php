@@ -5,8 +5,7 @@ class Model
     protected $db;
     public function __construct()
     {
-        $obj_db = new DB();
-        $this->db = $obj_db->connect();
+        $this->db = (new DB())->connect();
     }
 
 	// метод выборки данных
