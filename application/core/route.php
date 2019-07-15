@@ -75,7 +75,15 @@ class Route
 	
 	}
 
-	function ErrorPage404()
+    public static function ErrorPage500()
+    {
+        $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
+        header('HTTP/1.1 500');
+        header("Status: 500");
+        echo 'Internal server error';
+    }
+
+    public static function ErrorPage404()
 	{
         $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
         header('HTTP/1.1 404 Not Found');

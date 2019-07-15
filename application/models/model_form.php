@@ -29,27 +29,30 @@ class Model_Form extends Model
 					    	INSERT INTO `catalog` (Name,Razdel,global_id,Idx,Kod,Nomdescr,table_name) 
 					    	VALUES (?,?,?,?,?,?,?)
 				    	");
-				    	$sql2 = $this->db->prepare("
-					    	INSERT INTO `table_names` (table_name) 
-					    	VALUES (?)
-				    	");
+
 						}else{
-							// логировать ошибку
-							//echo "Не удалось подготовить запрос: (" . $mysqli->errno . ") " . $mysqli->error;
+                            throw new \Exception('не удалось удалось подготовить запрос');
 						}
 				    	if ($sql->bind_param("ssissss", $name, $razdel, $global_id, $idx, $kod, $nomdescr, $table_name)) {
 					    	$sql->bind_param("ssissss", $name, $razdel, $global_id, $idx, $kod, $nomdescr, $table_name);
-					    	$sql2->bind_param("s", $table_name);
+
 					    	$sql->execute();
-					    	$sql2->execute();
+
 					    	$sql->close();
-					    	$sql2->close();
+
 				    	}else{
 				    		// логировать ошибку
 				    		//echo "Не удалось привязать параметры: (" . $sql->errno . ") " . $sql->error;
 				    	}
 
 					}
+                    $sql2 = $this->db->prepare("
+					    	INSERT INTO `table_names` (table_name) 
+					    	VALUES (?)
+				    	");
+                    $sql2->bind_param("s", $table_name);
+                    $sql2->execute();
+                    $sql2->close();
 
 
 				}else{

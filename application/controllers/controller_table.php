@@ -42,7 +42,7 @@ class Controller_Table extends Controller
 	
 	function action_addview()
 	{
-		$this->view->generate('tableadd_view.php', 'template_view.php', $data);
+		$this->view->generate('tableadd_view.php', 'template_view.php', $data = null);
 	}
 	
 	

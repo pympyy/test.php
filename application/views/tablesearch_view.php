@@ -35,7 +35,7 @@
   <a href="/table/addView/?table_name=<?=$_GET["table_name"]?>">Add</a>
   <?php
 
-  echo '<h1>'.$data->fetch_assoc()[table_name].'</h1>';
+  echo '<h1>'.$data->fetch_assoc()['table_name'].'</h1>';
 
   foreach($data as $row)
   {

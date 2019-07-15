@@ -14,8 +14,8 @@ class Model
 		
 	}
 
-	protected function createLog($log)
-	{
-		
-	}
+    protected function myErrorHandler($errno, $errstr, $errfile, $errline)
+    {
+        
+    }
 }

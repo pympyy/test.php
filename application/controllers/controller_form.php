@@ -1,6 +1,5 @@
 <?php
 
-
 class Controller_Form extends Controller
 {
 
@@ -13,7 +12,7 @@ class Controller_Form extends Controller
 	function action_index()
 	{		
 		$tableNames = $this->model->get_table_names();
-		$this->view->generate('form_view.php', 'template_view.php', $data, $editResult = null, $tableNames);
+		$this->view->generate('form_view.php', 'template_view.php', $data = null, $editResult = null, $tableNames);
 	}
 	
 	function action_createtable()
