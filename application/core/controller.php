@@ -15,4 +15,12 @@ class Controller {
 	{
 		// todo	
 	}
+
+
+	protected function redirect($url)
+	{
+		http_response_code(302);
+		header("Location: $url"); 
+		exit();
+	}
 }

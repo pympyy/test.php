@@ -8,6 +8,7 @@
 	<body>
 	<div id="content">
 		<div class="box">
+			<a href="/">back</a>
 			<?php include 'application/views/'.$content_view; ?>
 
 		</div>

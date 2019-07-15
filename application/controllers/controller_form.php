@@ -12,12 +12,15 @@ class Controller_Form extends Controller
 	
 	function action_index()
 	{		
-		$this->view->generate('form_view.php', 'template_view.php', $data);
+		$tableNames = $this->model->get_table_names();
+		$this->view->generate('form_view.php', 'template_view.php', $data, $editResult = null, $tableNames);
 	}
 	
 	function action_createtable()
 	{
+		// $tableNames = $this->model->get_table_names();
 		$data = $this->model->get_data();
-		$this->view->generate('form_view.php', 'template_view.php', $data);
+		// $this->view->generate('form_view.php', 'template_view.php', $data, $editResult = null, $tableNames);
+		$this->redirect('/form/index/');
 	}
 }

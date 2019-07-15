@@ -13,17 +13,8 @@ class Model_Form extends Model
 				if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $uploadfile)) {
 
 					$table_name = $_POST['table_name'];//установка переменной имени таблицы
-					
-
-					// $this->db->query("CREATE TABLE `xmlbase`.`$table_name` (`id` INT NOT NULL AUTO_INCREMENT,`Name` varchar(255) NULL,`Razdel` varchar(255) NULL,`global_id` int(11) NULL,`Idx` varchar(255) NULL,`Kod` varchar(255) NULL,`Nomdescr` TEXT NULL,`table_name` varchar(255) NOT NULL,PRIMARY KEY (`id`)) ENGINE = InnoDB;");
-					
-
-					//обращение к классу DB методу connect и выполнение запроса на создание таблицы с именем $table_name и нужными статичными столбцами
-
-
 
 					$xml = simplexml_load_file($uploadfile) or die("Error: Cannot create object");//создание обьекта содержащего массив обьектов из файла XML
-
 
 					foreach ($xml->children() as $row) {//распарсиваем обьект и выполняем запрос добавления в базу
 						    $name = $row->Name;
@@ -38,17 +29,24 @@ class Model_Form extends Model
 					    	INSERT INTO `catalog` (Name,Razdel,global_id,Idx,Kod,Nomdescr,table_name) 
 					    	VALUES (?,?,?,?,?,?,?)
 				    	");
+				    	$sql2 = $this->db->prepare("
+					    	INSERT INTO `table_names` (table_name) 
+					    	VALUES (?)
+				    	");
 						}else{
 							// логировать ошибку
-							echo "Не удалось подготовить запрос: (" . $mysqli->errno . ") " . $mysqli->error;
+							//echo "Не удалось подготовить запрос: (" . $mysqli->errno . ") " . $mysqli->error;
 						}
 				    	if ($sql->bind_param("ssissss", $name, $razdel, $global_id, $idx, $kod, $nomdescr, $table_name)) {
 					    	$sql->bind_param("ssissss", $name, $razdel, $global_id, $idx, $kod, $nomdescr, $table_name);
+					    	$sql2->bind_param("s", $table_name);
 					    	$sql->execute();
+					    	$sql2->execute();
 					    	$sql->close();
+					    	$sql2->close();
 				    	}else{
 				    		// логировать ошибку
-				    		echo "Не удалось привязать параметры: (" . $sql->errno . ") " . $sql->error;
+				    		//echo "Не удалось привязать параметры: (" . $sql->errno . ") " . $sql->error;
 				    	}
 
 					}
@@ -61,13 +59,21 @@ class Model_Form extends Model
 			}else{
 				//генерировать ошибку по файлу
 			}
-		//удаляем XML, нечего его хранить на сервере
+		
 		unlink($uploadfile);
-		echo "записи попали в базу с индексом ".$table_name;
 		}else{
 			//генерировать ошибку по имени
 		}
 
+	}
+	
+	public function get_table_names(){
+		$query = "SELECT `table_name` FROM `table_names`;";
+		// $query = "SELECT * FROM `catalog` WHERE MATCH (Kod,table_name) AGAINST ('$kod');";
+
+		$result = mysqli_query($this->db, $query);
+
+		return $result;
 	}
 
 

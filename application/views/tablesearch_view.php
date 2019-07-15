@@ -23,10 +23,16 @@
   display: none;
   overflow: hidden;
 }
+.mar-left-20{ margin-left:20px; }
 </style>
 
 <div style="width: 600px;margin:0 auto;padding-top: 50px;">
-
+  <form action="/table/search/">
+    <input style="width: 50%;" type="search" placeholder="Search" hidden value="<?=$_GET["table_name"]?>" name="table_name">
+    <input style="width: 50%;" type="search" placeholder="Search" name="Kod" value="<?=$_GET["Kod"]?>">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <a href="/table/addView/?table_name=<?=$_GET["table_name"]?>">Add</a>
   <?php
 
   echo '<h1>'.$data->fetch_assoc()[table_name].'</h1>';
@@ -34,7 +40,15 @@
   foreach($data as $row)
   {
     echo '<div style="padding: 5px 0;">';
-      echo '<button class="accordion">Array'.$row['id'].'</button>';
+      echo '
+      <button class="accordion">Array'.$row['id'].'
+        <a class="mar-left-20" href="/table/edit/?table_name='.$_GET['table_name'].'&id='.$row['id'].'">
+          edit
+        </a>
+        <a class="mar-left-20" href="/table/delete/?table_name='.$_GET['table_name'].'&id='.$row['id'].'">
+          delete
+        </a>
+      </button>';
       echo '<div class="panel">';
       echo '<p><b>Name : </b>'.$row['Name'].'</p>
             <p><b>Razdel : </b>'.$row['Razdel'].'</p>

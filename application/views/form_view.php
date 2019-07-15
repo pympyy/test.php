@@ -10,3 +10,11 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<?php 
+  echo '<ul style="width: 400px;margin: 30px auto;">';
+  foreach ($tableNames as $table_name) {
+    echo '<li><a href="/table/index/?table_name='.$table_name['table_name'].'">'.$table_name['table_name'].'</a></li>';
+  }
+  echo '</ul>';
+?>
