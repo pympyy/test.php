@@ -1,28 +1,23 @@
 <?php
 
-/*
-Класс-маршрутизатор для определения запрашиваемой страницы.
-> цепляет классы контроллеров и моделей;
-> создает экземпляры контролеров страниц и вызывает действия этих контроллеров.
-*/
 class Route
 {
 
 	static function start()
 	{
-		// контроллер и действие по умолчанию
+
 		$controller_name = 'Form';
 		$action_name = 'index';
 		
 		$routes = explode('/', $_SERVER['REQUEST_URI']);
 
-		// получаем имя контроллера
+		// получает имя контроллера
 		if ( !empty($routes[1]) )
 		{	
 			$controller_name = $routes[1];
 		}
 		
-		// получаем имя экшена
+		// получает имя экшена
 		if ( !empty($routes[2]) )
 		{
 			$action_name = $routes[2];
@@ -33,12 +28,12 @@ class Route
 		$controller_name = 'Controller_'.$controller_name;
 		$action_name = 'action_'.$action_name;
 
-		
+		// информация для отладки
 		// echo "Model: $model_name <br>";
 		// echo "Controller: $controller_name <br>";
 		// echo "Action: $action_name <br>";
 		
-		// подцепляем файл с классом модели (файла модели может и не быть)
+		// вставляем файл с классом модели (файла модели может и не быть)
 
 		$model_file = strtolower($model_name).'.php';
 		$model_path = "application/models/".$model_file;
@@ -47,7 +42,7 @@ class Route
 			include "application/models/".$model_file;
 		}
 
-		// подцепляем файл с классом контроллера
+		// вставляем файл с классом контроллера
 		$controller_file = strtolower($controller_name).'.php';
 		$controller_path = "application/controllers/".$controller_file;
 		if(file_exists($controller_path))
@@ -65,7 +60,6 @@ class Route
 		
 		if(method_exists($controller, $action))
 		{
-			// вызываем действие контроллера
 			$controller->$action();
 		}
 		else
@@ -78,8 +72,6 @@ class Route
     public static function ErrorPage500()
     {
         $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
-        header('HTTP/1.1 500');
-        header("Status: 500");
         echo 'Internal server error';
     }
 

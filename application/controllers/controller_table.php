@@ -31,13 +31,13 @@ class Controller_Table extends Controller
 	function action_edition()
 	{
 		$editResult = $this->model->edition();
-		$this->redirect('/table/index/?table_name='.$_POST['table_name']);
+		$this->redirect('/table/search/?table_name='.$_POST['table_name'].'&Kod='.$_GET['Kod']);
 	}
 	
 	function action_delete()
 	{
 		$data = $this->model->delete();
-		$this->redirect('/table/index/?table_name='.$_GET['table_name']);
+		$this->redirect('/table/search/?table_name='.$_GET['table_name'].'&Kod='.$_GET['Kod']);
 	}
 	
 	function action_addview()
@@ -49,7 +49,7 @@ class Controller_Table extends Controller
 	function action_add()
 	{
 		$addResult = $this->model->add();
-		$this->redirect('/table/index/?table_name='.$_POST['table_name']);
+		$this->redirect('/table/search/?table_name='.$_POST['table_name'].'&Kod='.$_GET['Kod']);
 	}
 	
 }

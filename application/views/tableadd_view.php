@@ -1,4 +1,4 @@
-<form style="width: 400px;margin:0 auto;" name="formAdd" method="post" action="/table/add/">
+<form style="width: 400px;margin:0 auto;" name="formAdd" method="post" action="/table/add/?table_name=<?=$_GET["table_name"]?>&Kod=<?=$_GET["Kod"]?>">
 <?php
   	echo '
   	<div class="form-group">

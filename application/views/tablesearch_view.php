@@ -32,20 +32,20 @@
     <input style="width: 50%;" type="search" placeholder="Search" name="Kod" value="<?=$_GET["Kod"]?>">
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
-  <a href="/table/addView/?table_name=<?=$_GET["table_name"]?>">Add</a>
+  <a href="/table/addView/?table_name=<?=$_GET["table_name"]?>&Kod=<?=$_GET["Kod"]?>">Add</a>
   <?php
 
-  echo '<h1>'.$data->fetch_assoc()['table_name'].'</h1>';
+  // echo '<h1>'.$data->fetch_assoc()['table_name'].'</h1>';
 
   foreach($data as $row)
   {
     echo '<div style="padding: 5px 0;">';
       echo '
       <button class="accordion">Array'.$row['id'].'
-        <a class="mar-left-20" href="/table/edit/?table_name='.$_GET['table_name'].'&id='.$row['id'].'">
+        <a class="mar-left-20" href="/table/edit/?table_name='.$_GET['table_name'].'&id='.$row['id'].'&Kod='.$_GET['Kod'].'">
           edit
         </a>
-        <a class="mar-left-20" href="/table/delete/?table_name='.$_GET['table_name'].'&id='.$row['id'].'">
+        <a class="mar-left-20" href="/table/delete/?table_name='.$_GET['table_name'].'&id='.$row['id'].'&Kod='.$_GET['Kod'].'">
           delete
         </a>
       </button>';

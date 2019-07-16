@@ -41,31 +41,39 @@ class Model_Form extends Model
 					    	$sql->close();
 
 				    	}else{
-				    		// логировать ошибку
-				    		//echo "Не удалось привязать параметры: (" . $sql->errno . ") " . $sql->error;
+				    		throw new \Exception('не удалось проверить и отправить запрос на сервер');
 				    	}
 
 					}
-                    $sql2 = $this->db->prepare("
+					if ($this->db->prepare("
+					    	INSERT INTO `table_names` (table_name) 
+					    	VALUES (?)
+				    	")) {
+						$sql2 = $this->db->prepare("
 					    	INSERT INTO `table_names` (table_name) 
 					    	VALUES (?)
 				    	");
-                    $sql2->bind_param("s", $table_name);
-                    $sql2->execute();
-                    $sql2->close();
+	                    $sql2->bind_param("s", $table_name);
+	                    $sql2->execute();
+	                    $sql2->close();
 
+					} else {
+						throw new \Exception('не удалось проверить и отправить запрос для создания группы на сервер');
+					}
+					
+                    
 
 				}else{
-				// логировать ошибку echo "Возможная атака с помощью файловой загрузки!\n";
+				throw new \Exception('возможная атака с помощью файла');
 				}
 
 			}else{
-				//генерировать ошибку по файлу
+				throw new \Exception('ошибка по файлу');
 			}
 		
 		unlink($uploadfile);
 		}else{
-			//генерировать ошибку по имени
+			throw new \Exception('не введено имя группы');
 		}
 
 	}

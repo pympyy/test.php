@@ -1,4 +1,4 @@
-<form style="width: 400px;margin:0 auto;" name="formEdit" method="post" action="/table/edition/">
+<form style="width: 400px;margin:0 auto;" name="formEdit" method="post" action="/table/edition/?table_name=<?=$_GET["table_name"]?>&Kod=<?=$_GET["Kod"]?>">
 <?php
 
 foreach($data as $row)

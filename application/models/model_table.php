@@ -18,9 +18,7 @@ class Model_Table extends Model
 	// формируем масссив массивов записей поиска
 		$table_name = htmlspecialchars($_GET["table_name"]);
 		$kod = htmlspecialchars($_GET["Kod"]);
-
-		$query = "SELECT * FROM `catalog` WHERE `Kod` LIKE '%$kod%' AND `table_name` = '$table_name';";
-		// $query = "SELECT * FROM `catalog` WHERE MATCH (Kod,table_name) AGAINST ('$kod');";
+		$query = "SELECT * FROM `catalog` WHERE ( `Kod` LIKE '%$kod%' OR `Name` LIKE '%$kod%' ) AND `table_name` = '$table_name';";
 			
 		$result = mysqli_query($this->db, $query);
 
@@ -28,12 +26,10 @@ class Model_Table extends Model
 	}
 	public function get_edit_data()
 	{
-	// формируем масссив массивов записей поиска
 		$table_name = htmlspecialchars($_GET["table_name"]);
 		$id = htmlspecialchars($_GET["id"]);
 
 		$query = "SELECT * FROM `catalog` WHERE `id` = '$id' AND `table_name` = '$table_name';";
-		// $query = "SELECT * FROM `catalog` WHERE MATCH (Kod,table_name) AGAINST ('$kod');";
 
 		$result = mysqli_query($this->db, $query);
 
